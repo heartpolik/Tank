@@ -4,16 +4,15 @@
 
 #include <iostream>
 #include "tank.h"
-#include <stdio.h>
-#include <Windows.h>
+
 #include "win_console.h"
 
-#include "windows.h"
+
 
 void tank::init(){
 
-        x=0;
-        y=0;
+        x=10;
+        y=5;
         lives=5;
         dir=UP;
         isAlive = true;
@@ -22,42 +21,47 @@ void tank::init(){
 
 }
 
-bool tank::_isMoveAval()
+void tank::_isMoveAval()
 {
     // check borders
     isMove=true;
 
     if(y==0 && dir==UP)     isMove = false;
-    if(y==9 && dir==DOWN)  isMove = false;
+    if(y==27 && dir==DOWN)  isMove = false;
     if(x==0 && dir==LEFT)   isMove = false;
-    if(x==9 && dir==RIGHT) isMove = false;
+    if(x==54 && dir==RIGHT) isMove = false;
+
 }
 
 void tank::move()
 {
-    tank::_isMoveAval();
+    _isMoveAval();
 
-    switch (dir)
+    if(isMove)
     {
-        case UP:
+
+        switch (dir)
         {
-            --y;
-            break;
-        }
-        case DOWN:
-        {
-            ++y;
-            break;
-        }
-        case LEFT:
-        {
-            --x;
-            break;
-        }
-        case RIGHT:
-        {
-            ++x;
-            break;
+            case UP:
+            {
+                --y;
+                break;
+            }
+            case DOWN:
+            {
+                ++y;
+                break;
+            }
+            case LEFT:
+            {
+                x-=2;
+                break;
+            }
+            case RIGHT:
+            {
+                x+=2;
+                break;
+            }
         }
     }
 }
@@ -68,9 +72,12 @@ void tank::change_pos(int aX, int aY)
     y=aY;
 }
 
-void tank::change_dir(eDirection aDir)
+bool tank::change_dir(eDirection aDir)
 {
+    bool f = true;
+    if(dir!=aDir) f=false;
     dir=aDir;
+    return f;
 }
 
 void tank::get_hit()
@@ -81,43 +88,57 @@ void tank::get_hit()
 
 void tank::t_draw()
 {
+    set_position(x,y);
 
     switch (dir)
     {
-        set_position(x*6-2,y*3-1);
+
 
         case UP:
         {
-            std::cout << "  ??  " << std::endl;
-            std::cout << "??  ??" << std::endl;
-            std::cout << "??  ??" << std::endl;
+            set_position(x,y);
+            printf("  %c%c  ",223,223);
+            set_position(x,y+1);
+            printf("%c%c  %c%c",219,219,219,219);
+            set_position(x,y+2);
+            printf("%c%c  %c%c",219,219,219,219);
 
             break;
         }
 
         case DOWN:
         {
-            std::cout << "??  ??" << std::endl;
-            std::cout << "??  ??" << std::endl;
-            std::cout << "  ??  " << std::endl;
+            set_position(x,y);
+
+            printf("%c%c  %c%c",219,219,219,219);
+            set_position(x,y+1);
+            printf("%c%c  %c%c",219,219,219,219);
+            set_position(x,y+2);
+            printf("  %c%c  ",220,220);
 
             break;
         }
 
         case RIGHT:
         {
-            std::cout << "????  " << std::endl;
-            std::cout << "     ?" << std::endl;
-            std::cout << "????  " << std::endl;
+            set_position(x,y);
+            printf("%c%c%c%c",219,219,219,219);
+            set_position(x,y+1);
+            printf("     %c",254);
+            set_position(x,y+2);
+            printf("%c%c%c%c",219,219,219,219);
 
             break;
         }
 
         case LEFT:
         {
-            std::cout << "????  " << std::endl;
-            std::cout << "?     " << std::endl;
-            std::cout << "????  " << std::endl;
+            set_position(x,y);
+            printf("  %c%c%c%c",219,219,219,219);
+            set_position(x,y+1);
+            printf("%c",254);
+            set_position(x,y+2);
+            printf("  %c%c%c%c",219,219,219,219);
 
             break;
         }

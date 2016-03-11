@@ -12,29 +12,65 @@ using namespace std;
 //int gY = 9;
 
 
-int main() {
+int main()
+{
 
     console_init();
+
+    eCKeyKode keyInput;
 
     tank pTank;
 
     pTank.init();
+    pTank.t_draw();
 
-    pTank.change_dir(tank::RIGHT);
+    bool movFlag;
 
     while(1)
     {
+
+
+
+        keyInput = wait_console_key_press();
+
+        switch(keyInput)
+        {
+            case KEY_UP:
+            {
+                movFlag=pTank.change_dir(tank::UP);
+                break;
+            }
+            case KEY_LEFT:
+            {
+                movFlag=pTank.change_dir(tank::LEFT);
+                break;
+            }
+            case KEY_RIGHT:
+            {
+                movFlag=pTank.change_dir(tank::RIGHT);
+                break;
+            }
+            case KEY_DOWN:
+            {
+                movFlag=pTank.change_dir(tank::DOWN);
+                break;
+            }
+            case KEY_ESCAPE:
+            {
+
+                break;
+            }
+            case KEY_ENTER:
+            case UNKNOWN:
+                break;
+        }
+
         system("cls");
+        if (movFlag) pTank.move();
         pTank.t_draw();
         Sleep(33);
+        if (keyInput==KEY_ESCAPE) break;
+    };
 
-    }
-
-
-
-
-//
-//    pTank[1].t_draw();
-//    cout << "Hello, World!" << endl;
     return 0;
 }

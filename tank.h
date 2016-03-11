@@ -37,14 +37,13 @@ public:
 
     void move();
     void init();
-    void change_dir(eDirection aDir);
+    bool change_dir(eDirection aDir);
     void change_pos(int aX, int aY);
     void get_hit();
     void t_draw();
 
-private:
 
-    bool _isMoveAval();
+    void _isMoveAval();
 
 
 
