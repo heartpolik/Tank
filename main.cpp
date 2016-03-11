@@ -1,46 +1,22 @@
 #include <iostream>
+#include "tank.h"
+#include <stdio.h>
+
 
 using namespace std;
 
 
 
 
-
-class tank
-{
-private:
-    int x=0;
-    int y=0;
-
-    int live=5;
-
-    eDirection dir=UP;
-
-public:
-
-    enum eDirection
-    {
-        LEFT =0,
-        RIGHT,
-        UP,
-        DOWN
-    };
-
-    void change_dir(eDirection aDir)
-    {
-        dir=aDir;
-    }
-
-    void change_pos(int aX, int aY)
-    {
-        x=aX;
-        y=aY;
-    }
-
-};
-
-
 int main() {
+
+    tank pTank[10];
+
+    pTank[1].init();
+    pTank[1].t_draw();
+
+    pTank[1].change_dir(tank::RIGHT);
+    pTank[1].t_draw();
     cout << "Hello, World!" << endl;
     return 0;
 }
