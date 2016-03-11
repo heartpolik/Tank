@@ -2,21 +2,39 @@
 #include "tank.h"
 #include <stdio.h>
 
+#include "win_console.h"
+
 
 using namespace std;
 
-
+//global size of gaming world
+//int gX = 9;
+//int gY = 9;
 
 
 int main() {
 
-    tank pTank[10];
+    console_init();
 
-    pTank[1].init();
-    pTank[1].t_draw();
+    tank pTank;
 
-    pTank[1].change_dir(tank::RIGHT);
-    pTank[1].t_draw();
-    cout << "Hello, World!" << endl;
+    pTank.init();
+
+    pTank.change_dir(tank::RIGHT);
+
+    while(1)
+    {
+        system("cls");
+        pTank.t_draw();
+        Sleep(33);
+
+    }
+
+
+
+
+//
+//    pTank[1].t_draw();
+//    cout << "Hello, World!" << endl;
     return 0;
 }
