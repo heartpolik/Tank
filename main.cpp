@@ -1,5 +1,6 @@
 #include <iostream>
 #include "tank.h"
+#include "bullet.h"
 #include <stdio.h>
 
 #include "win_console.h"
@@ -8,8 +9,10 @@
 using namespace std;
 
 //global size of gaming world
-//int gX = 9;
-//int gY = 9;
+int gX = 15;
+int gY = 15;
+int bX = 6;
+int bY = 3;
 
 
 int main()
@@ -22,6 +25,7 @@ int main()
     tank pTank;
 
     pTank.init();
+    pTank.initWorld(gX,gY,bX,bY);
     pTank.t_draw();
 
     bool movFlag;
@@ -61,6 +65,9 @@ int main()
                 break;
             }
             case KEY_ENTER:
+            {
+                pTank.fire();
+            }
             case UNKNOWN:
                 break;
         }

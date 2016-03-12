@@ -4,10 +4,17 @@
 
 #include <iostream>
 #include "tank.h"
+#include "bullet.h"
 
 #include "win_console.h"
 
-
+void tank::initWorld(int wX, int wY, int bX, int bY)
+{
+    worldX=wX;
+    worldY=wY;
+    blockX=bX;
+    blockY=bY;
+};
 
 void tank::init(){
 
@@ -84,6 +91,15 @@ void tank::get_hit()
 {
     --lives;
     if (!lives) isAlive= false;
+}
+
+void tank::fire()
+{
+    bullet tmpBul = bullet();
+    tmpBul.initWorld(worldX,worldY,blockX,blockY);
+    tmpBul.setPos(x,y);
+    tmpBul.setDir(dir);
+//    tmpBul.bulDraw;
 }
 
 void tank::t_draw()

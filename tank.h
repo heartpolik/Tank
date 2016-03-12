@@ -20,6 +20,12 @@ public:
     };
 
 private:
+
+    int worldX;
+    int worldY;
+    int blockX;
+    int blockY;
+
     int x;
     int y;
 
@@ -34,7 +40,7 @@ private:
 public:
 
 
-
+    void initWorld(int wX, int wY, int bX, int bY);
     void move();
     void init();
     bool change_dir(eDirection aDir);
@@ -44,6 +50,9 @@ public:
 
 
     void _isMoveAval();
+
+
+    void fire();
 
 
 
